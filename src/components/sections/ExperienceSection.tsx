@@ -1,121 +1,124 @@
 
-import React, { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { Calendar, Building, ExternalLink, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
-interface Experience {
+interface ExperienceItem {
   id: string;
+  title: string;
   company: string;
-  position: string;
   period: string;
-  description: string[];
+  yearStart: string;
+  yearEnd: string;
+  description: string;
   technologies: string[];
 }
 
-const experiences: Experience[] = [
+const experiences: ExperienceItem[] = [
   {
     id: 'techcorp',
-    company: 'TechCorp AI',
-    position: 'Senior AI Engineer',
+    title: 'Senior AI Engineer',
+    company: 'TechInnovate AI',
     period: 'Jan 2021 - Present',
-    description: [
-      'Led the development of a computer vision system that improved manufacturing quality control efficiency by 35%',
-      'Designed and implemented a recommendation engine that increased user engagement by 28% across platform services',
-      'Mentored junior engineers and established best practices for ML model development and deployment',
-      'Collaborated with cross-functional teams to integrate AI solutions into existing product offerings'
-    ],
-    technologies: ['PyTorch', 'Docker', 'Kubernetes', 'MLflow', 'AWS SageMaker']
+    yearStart: '2021',
+    yearEnd: 'Present',
+    description: 'Leading the development of large language models for enterprise applications. Optimized model training pipelines reducing inference time by 40%.',
+    technologies: ['PyTorch', 'Transformers', 'CUDA', 'AWS SageMaker']
   },
   {
     id: 'datascience',
-    company: 'DataScience Inc.',
-    position: 'Machine Learning Engineer',
+    title: 'Machine Learning Engineer',
+    company: 'DataVision Corp',
     period: 'Mar 2019 - Dec 2020',
-    description: [
-      'Developed NLP models for sentiment analysis that improved customer feedback processing time by 60%',
-      'Built and deployed a real-time anomaly detection system for network security monitoring',
-      'Optimized ML pipelines resulting in 40% reduction in model training time',
-      'Authored detailed technical documentation and presented findings to technical and non-technical stakeholders'
-    ],
-    technologies: ['TensorFlow', 'Keras', 'Python', 'GCP', 'SQL']
+    yearStart: '2019',
+    yearEnd: '2021',
+    description: 'Designed and implemented computer vision algorithms for autonomous systems. Developed a real-time object detection system with 95% accuracy.',
+    technologies: ['TensorFlow', 'OpenCV', 'Python', 'Kubernetes']
   },
   {
     id: 'ailab',
-    company: 'AI Research Lab',
-    position: 'AI Research Intern',
+    title: 'AI Research Intern',
+    company: 'Future AI Labs',
     period: 'Jun 2018 - Feb 2019',
-    description: [
-      'Conducted research on reinforcement learning algorithms for robotic control systems',
-      'Implemented and evaluated multiple deep learning architectures for image classification',
-      'Co-authored a research paper published in a peer-reviewed AI conference',
-      'Collaborated with a team of researchers to develop innovative AI solutions for real-world problems'
-    ],
-    technologies: ['PyTorch', 'Python', 'CUDA', 'OpenCV', 'ROS']
+    yearStart: '2018',
+    yearEnd: '2019',
+    description: 'Conducted research on reinforcement learning algorithms. Published a paper on multi-agent systems at a top-tier conference.',
+    technologies: ['PyTorch', 'OpenAI Gym', 'JAX', 'Docker']
   }
 ];
 
 const ExperienceSection = () => {
-  const [activeTab, setActiveTab] = useState('techcorp');
-  
   return (
     <div className="space-y-8">
-      <h2 className="section-title">Experience</h2>
+      <h2 className="section-title">Work Experience</h2>
       
-      <Tabs defaultValue="techcorp" value={activeTab} onValueChange={setActiveTab} className="mt-8">
-        <TabsList className="mb-8 overflow-x-auto flex flex-nowrap w-full gap-1 bg-transparent">
-          {experiences.map((exp) => (
-            <TabsTrigger 
-              key={exp.id} 
-              value={exp.id}
-              className="data-[state=active]:bg-accent/10 data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4"
-            >
-              {exp.company}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+      <p className="text-muted-foreground max-w-2xl mb-8">
+        My professional journey in AI engineering has been marked by impactful roles where 
+        I've applied cutting-edge techniques to solve complex problems.
+      </p>
+      
+      <div className="relative mt-12">
+        {/* Timeline vertical line */}
+        <div className="absolute left-[22px] top-1 bottom-1 w-[2px] bg-border" />
         
-        {experiences.map((exp) => (
-          <TabsContent key={exp.id} value={exp.id}>
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-xl font-bold">{exp.position}</h3>
-                <p className="text-muted-foreground">{exp.period}</p>
+        {/* Experience items */}
+        <div className="space-y-12">
+          {experiences.map((exp, index) => (
+            <div key={exp.id} className="relative pl-14">
+              {/* Calendar icon with year */}
+              <div className="absolute left-0 top-0 flex flex-col items-center">
+                <div className="w-11 h-11 rounded-md bg-muted flex items-center justify-center text-primary">
+                  <Calendar className="w-6 h-6" />
+                </div>
+                <span className="text-sm font-medium mt-1 text-primary">
+                  {exp.yearStart} - {exp.yearEnd}
+                </span>
               </div>
               
-              <ul className="space-y-3 text-muted-foreground">
-                {exp.description.map((item, index) => (
-                  <li key={index} className="flex">
-                    <ArrowRight className="h-5 w-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              
-              <div className="pt-2">
-                <h4 className="text-sm font-medium mb-2">Technologies Used:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {exp.technologies.map((tech, index) => (
-                    <span 
-                      key={index} 
-                      className="bg-muted px-2 py-1 rounded-md text-xs font-mono"
+              {/* Content */}
+              <div className="rounded-lg border border-border bg-card/30 hover:bg-card/50 transition-colors p-5">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-3">
+                  <div>
+                    <h3 className="text-xl font-bold">{exp.title}</h3>
+                    <div className="flex items-center text-muted-foreground mt-1">
+                      <Building className="h-4 w-4 mr-1.5" />
+                      <span>{exp.company}</span>
+                    </div>
+                  </div>
+                  <span className="text-sm text-muted-foreground whitespace-nowrap">
+                    {exp.period}
+                  </span>
+                </div>
+                
+                <p className="text-muted-foreground mb-4">
+                  {exp.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {exp.technologies.map((tech, techIndex) => (
+                    <Badge 
+                      key={techIndex} 
+                      variant="secondary" 
+                      className="bg-accent/20 hover:bg-accent/30 text-foreground font-mono text-xs"
                     >
                       {tech}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-xs text-primary hover:text-primary/80 p-0 h-auto"
+                >
+                  View Details <ChevronRight className="h-3 w-3 ml-1" />
+                </Button>
               </div>
-              
-              <a 
-                href="#" 
-                className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80 text-sm mt-2"
-              >
-                Company Website 
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
             </div>
-          </TabsContent>
-        ))}
-      </Tabs>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
