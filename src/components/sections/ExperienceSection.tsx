@@ -32,7 +32,7 @@ const experiences: ExperienceItem[] = [
     company: 'DataVision Corp',
     period: 'Mar 2019 - Dec 2020',
     yearStart: '2019',
-    yearEnd: '2021',
+    yearEnd: '2020',
     description: 'Designed and implemented computer vision algorithms for autonomous systems. Developed a real-time object detection system with 95% accuracy.',
     technologies: ['TensorFlow', 'OpenCV', 'Python', 'Kubernetes']
   },
@@ -58,40 +58,40 @@ const ExperienceSection = () => {
         I've applied cutting-edge techniques to solve complex problems.
       </p>
       
-      <div className="relative mt-12">
+      <div className="relative mt-8">
         {/* Timeline vertical line */}
-        <div className="absolute left-[22px] top-1 bottom-1 w-[2px] bg-border" />
+        <div className="absolute left-8 top-0 bottom-0 w-[2px] bg-primary/20" />
         
         {/* Experience items */}
-        <div className="space-y-12">
+        <div className="space-y-16">
           {experiences.map((exp, index) => (
-            <div key={exp.id} className="relative pl-14">
-              {/* Calendar icon with year */}
-              <div className="absolute left-0 top-0 flex flex-col items-center">
-                <div className="w-11 h-11 rounded-md bg-muted flex items-center justify-center text-primary">
-                  <Calendar className="w-6 h-6" />
+            <div key={exp.id} className="relative pl-24">
+              {/* Year indicator on the left */}
+              <div className="absolute left-0 top-0 flex flex-col items-center text-primary">
+                <div className="w-16 h-16 rounded-full bg-background border-2 border-primary flex items-center justify-center z-10">
+                  <Calendar className="w-7 h-7" />
                 </div>
-                <span className="text-sm font-medium mt-1 text-primary">
+                <span className="text-sm font-medium mt-2 font-mono">
                   {exp.yearStart} - {exp.yearEnd}
                 </span>
               </div>
               
               {/* Content */}
-              <div className="rounded-lg border border-border bg-card/30 hover:bg-card/50 transition-colors p-5">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-3">
+              <div className="rounded-lg border border-border bg-card/10 hover:bg-card/20 transition-all p-6 shadow-sm">
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-2 mb-4">
                   <div>
-                    <h3 className="text-xl font-bold">{exp.title}</h3>
+                    <h3 className="text-2xl font-bold text-foreground">{exp.title}</h3>
                     <div className="flex items-center text-muted-foreground mt-1">
                       <Building className="h-4 w-4 mr-1.5" />
-                      <span>{exp.company}</span>
+                      <span className="font-medium">{exp.company}</span>
                     </div>
                   </div>
-                  <span className="text-sm text-muted-foreground whitespace-nowrap">
+                  <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full font-mono">
                     {exp.period}
                   </span>
                 </div>
                 
-                <p className="text-muted-foreground mb-4">
+                <p className="text-muted-foreground mb-5 leading-relaxed">
                   {exp.description}
                 </p>
                 
@@ -110,7 +110,7 @@ const ExperienceSection = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-xs text-primary hover:text-primary/80 p-0 h-auto"
+                  className="text-xs text-primary hover:text-primary/80 p-0 h-auto font-medium"
                 >
                   View Details <ChevronRight className="h-3 w-3 ml-1" />
                 </Button>
