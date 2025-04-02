@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { 
@@ -12,6 +11,7 @@ import {
   X 
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ThemeToggle from './ThemeToggle';
 
 interface NavItem {
   icon: React.ReactNode;
@@ -35,10 +35,8 @@ const Navbar = () => {
   
   useEffect(() => {
     const handleScroll = () => {
-      // Update navbar styling based on scroll position
       setScrolled(window.scrollY > 20);
       
-      // Update active section based on scroll position
       const sections = navItems.map(item => item.href.substring(1));
       
       for (const section of sections.reverse()) {
@@ -69,7 +67,6 @@ const Navbar = () => {
           AI Engineer
         </a>
         
-        {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-1">
           {navItems.map((item) => (
             <li key={item.label}>
@@ -96,18 +93,20 @@ const Navbar = () => {
           ))}
         </ul>
         
-        {/* Mobile Navigation Toggle */}
-        <Button
-          variant="ghost"
-          size="sm"
-          className="md:hidden"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X /> : <Menu />}
-        </Button>
+        <div className="flex items-center space-x-4">
+          <ThemeToggle />
+          
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X /> : <Menu />}
+          </Button>
+        </div>
       </nav>
       
-      {/* Mobile Navigation Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-lg border-t border-border animate-fade-in">
           <ul className="container py-4 space-y-1">
